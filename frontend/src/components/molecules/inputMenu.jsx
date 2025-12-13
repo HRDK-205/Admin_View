@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function Menu() {
     const [menu, setMenu] = useState([]);
     const [name, setName] = useState("");
+    const [harga, setHarga] = useState("");
     const [editId, setEditId] = useState(null);
 
     const fetchData = async () => {
@@ -21,16 +22,17 @@ export default function Menu() {
       await fetch(`http://localhost:5000/menu/${editId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name: name, harga: harga }),
       });
     } else {
       await fetch("http://localhost:5000/menu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name: name, harga: harga }),
       });
     }
     setName("");
+    setHarga("");
     setEditId(null);
     fetchData();
     };
@@ -63,13 +65,7 @@ export default function Menu() {
                 <label className="block text-sm font-medium text-gray-600 mb-1">
                     Harga
                 </label>
-                <input  type="text" placeholder="Masukkan Harga" value={name} onChange={(e) => setName(e.target.value)} required className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"/>
-            </div>
-            <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Harga
-                </label>
-                <input  type="text" placeholder="Masukkan Harga" value={name} onChange={(e) => setName(e.target.value)} required className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"/>
+                <input  type="text" placeholder="Masukkan Harga" value={harga} onChange={(e) => setHarga(e.target.value)} required className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"/>
             </div>
             {/* BUTTON */}
             <div className="flex gap-3">
@@ -78,7 +74,7 @@ export default function Menu() {
                 </button>
 
                 {editId && (
-                <button   type="button" onClick={() => {setEditId(null); setName("");}} className="flex-1 px-5 py-2.5 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 active:scale-95 transition font-medium">
+                <button   type="button" onClick={() => {setEditId(null); setName(""); setHarga("");}} className="flex-1 px-5 py-2.5 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 active:scale-95 transition font-medium">
                     Batal
                 </button>
                 )}
@@ -90,7 +86,6 @@ export default function Menu() {
                 <tr>
                     <th className="p-3 text-left">ID</th>
                     <th className="p-3 text-left">Nama</th>
-                    <th className="p-3 text-left">Harga</th>
                     <th className="p-3 text-left">Harga</th>
                     <th className="p-3 text-left">Aksi</th>
                 </tr>
@@ -107,10 +102,9 @@ export default function Menu() {
                 <tr key={s.id}>
                     <td className="border border-gray-400 p-2 text-center">{s.id}</td>
                     <td className="border border-gray-400 p-2">{s.name}</td>
-                    <td className="border border-gray-400 p-2">{s.name}</td>
-                    <td className="border border-gray-400 p-2">{s.name}</td>
+                    <td className="border border-gray-400 p-2">{s.harga}</td>
                     <td className="border border-gray-400 p-2">
-                        <button onClick={() => {setEditId(s.id); setName(s.name);}} className="px-3 py-1 mr-2 bg-yellow-400 rounded-md hover:bg-yellow-500 transition">
+                        <button onClick={() => {setEditId(s.id); setName(s.name); setHarga(s.harga);}} className="px-3 py-1 mr-2 bg-yellow-400 rounded-md hover:bg-yellow-500 transition">
                             Edit
                         </button>
                         <button onClick={() => handleDelete(s.id)} className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition">

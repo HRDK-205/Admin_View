@@ -21,13 +21,13 @@ app.get('/menu', (req, res) => {
 });
 
 app.post('/menu', (req, res) => {
-  db.query("INSERT INTO menu (name) VALUES (?)", [req.body.name], (err, result) => {
-    res.json({ id: result.insertId, name: req.body.name });
+  db.query("INSERT INTO menu (name,harga) VALUES (?,?)", [req.body.name, req.body.harga], (err, result) => {
+    res.json({ id: result.insertId, name: req.body.name, harga: req.body.harga });
   });
 });
 
 app.put('/menu/:id', (req, res) => {
-  db.query("UPDATE menu SET name=? WHERE id=?", [req.body.name, req.params.id]);
+  db.query("UPDATE menu SET name=?, harga=? WHERE id=?", [req.body.name, req.body.harga, req.params.id]);
   res.json({ message: "updated" });
 });
 
