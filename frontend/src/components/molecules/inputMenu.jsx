@@ -65,6 +65,12 @@ export default function Menu() {
                 </label>
                 <input  type="text" placeholder="Masukkan Harga" value={name} onChange={(e) => setName(e.target.value)} required className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"/>
             </div>
+            <div className="mb-2">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
+                    Harga
+                </label>
+                <input  type="text" placeholder="Masukkan Harga" value={name} onChange={(e) => setName(e.target.value)} required className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"/>
+            </div>
             {/* BUTTON */}
             <div className="flex gap-3">
                 <button type="submit" className="flex-1 px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:scale-95 transition font-medium" >
@@ -85,6 +91,7 @@ export default function Menu() {
                     <th className="p-3 text-left">ID</th>
                     <th className="p-3 text-left">Nama</th>
                     <th className="p-3 text-left">Harga</th>
+                    <th className="p-3 text-left">Harga</th>
                     <th className="p-3 text-left">Aksi</th>
                 </tr>
             </thead>
@@ -99,6 +106,7 @@ export default function Menu() {
               menu.map((s) => (
                 <tr key={s.id}>
                     <td className="border border-gray-400 p-2 text-center">{s.id}</td>
+                    <td className="border border-gray-400 p-2">{s.name}</td>
                     <td className="border border-gray-400 p-2">{s.name}</td>
                     <td className="border border-gray-400 p-2">{s.name}</td>
                     <td className="border border-gray-400 p-2">
