@@ -1,27 +1,25 @@
 import Sidebar from "../organisms/Sidebar";
 import Navbar from "../organisms/Navbar";
-import StatCard from "../molecules/Startcard";
-import Table from "../molecules/Tabel";
-import Menu from "../molecules/inputMenu";
+import MultiChart from "./Managemen";
 
 export default function Dashboard() {
   return (
-    <div className="flex">
+    // 1. Tambahkan h-screen dan overflow-hidden pada pembungkus utama
+    <div className="flex h-screen overflow-hidden bg-gray-50">
+      
+      {/* Sidebar tetap di tempat karena class fixed di komponennya */}
       <Sidebar />
 
-      <div className="ml-64 w-full">
-        <Navbar />
-        <Menu/>
-        <main className="p-6">
-          {/* STAT */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <StatCard title="Total Users" value="120" />
-            <StatCard title="Active Users" value="87" />
-            <StatCard title="Reports" value="34" />
-          </div> */}
+      {/* 2. Container utama diatur agar bisa scroll secara mandiri */}
+      <div className="ml-64 flex flex-col flex-1 h-full overflow-hidden">
+        
+        {/* 3. Navbar tetap di atas */}
+        <div className="sticky top-0 z-10">
+          <Navbar />
+        </div>
 
-          {/* TABLE */}
-          {/* <Table /> */}
+        <main className="p-6">
+          <MultiChart />
         </main>
       </div>
     </div>
